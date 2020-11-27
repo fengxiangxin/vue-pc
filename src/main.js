@@ -1,7 +1,10 @@
 import Vue from "vue";
+/* 引入根组件 */
 import App from "./App";
-
+/* 引入路由配置 */
 import router from "./router";
+/* 引入全局样式 */
+import "./styles/reset.css";
 
 Vue.config.productionTip = false;
 

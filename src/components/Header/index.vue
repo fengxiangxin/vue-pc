@@ -4,8 +4,10 @@
       <div class="header-top">
         <div class="header-login-register">
           <h1 class="header-welcome">尚品汇欢迎您！请</h1>
-          <a href="###" class="header-login">登录 </a>
-          <a href="###" class="header-register">免费注册</a>
+          <router-link to="/login" class="header-login">登录 </router-link>
+          <router-link to="/register" class="header-register"
+            >免费注册</router-link
+          >
         </div>
         <div class="header-type-list">
           <a href="###">我的订单</a>
@@ -21,12 +23,16 @@
     </div>
     <div class="header-bottom">
       <div class="header-logo">
-        <a href="###"><img src="./images/logo.png" alt="Logo" /></a>
+        <router-link to="/"
+          ><img src="./images/logo.png" alt="Logo"
+        /></router-link>
       </div>
       <div class="header-form">
-        <form action="###">
+        <form action="">
           <input type="text" class="header-search" />
-          <button class="header-search-button" type="button">搜索</button>
+          <button @click="search" class="header-search-button" type="button">
+            搜索
+          </button>
         </form>
       </div>
     </div>
@@ -36,6 +42,11 @@
 <script>
 export default {
   name: "Header",
+  methods: {
+    search() {
+      this.$router.push('/search')
+    },
+  },
 };
 </script>
 
