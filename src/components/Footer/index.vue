@@ -6,6 +6,10 @@
         <dt v-text="dl.dt"></dt>
         <dd v-for="dd in dl.dd" :key="dd" v-html="dd"></dd>
       </dl>
+      <dl>
+        <dt>帮助中心</dt>
+        <dd><img src="./images/wx_cz.jpg" alt=""></dd>
+      </dl>
     </div>
     <div></div>
   </div>
@@ -43,10 +47,10 @@ export default {
           dt: "特色服务",
           dd: ["夺宝岛", "DIY装机", "延保服务", "尚品汇E卡", "尚品汇通信"],
         },
-        {
-          dt: "帮助中心",
-          dd: [`<img src="./images/wx_cz.jpg" alt="">`],
-        },
+        // {
+        //   dt: "帮助中心",
+        //   dd: [`<img src="./images/wx_cz.jpg" alt="">`],
+        // },
       ],
     };
   },
@@ -58,4 +62,5 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
 </style>
