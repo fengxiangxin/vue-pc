@@ -17,7 +17,14 @@ module.exports = {
   },
 
   /* 配置代理服务器，解决跨域问题 */
-  // devServer: {
-  //   proxy: "",
-  // },
+  devServer: {
+    proxy: {
+      "/api": {
+        /* 转发请求到目标服务器地址 */
+        target: "http://182.92.128.115",
+        /* 允许跨域 */
+        changeOrgin: true,
+      },
+    },
+  },
 };

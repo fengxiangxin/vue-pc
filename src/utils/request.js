@@ -3,7 +3,7 @@ import axios from "axios";
 
 /*  */
 const instance = axios.create({
-  baseURL: "http://182.92.128.115/api",
+  baseURL: "/api",
   headers: {},
 });
 
@@ -31,12 +31,12 @@ instance.interceptors.response.use(
       /* 将数据作为promise的结果值返回 */
       return response.data.data;
     }
+    console.log(response.data);
     /* code!==200说明出现错误，没有请求到数据，返回失败的promise */
     return Promise.reject(response.data.message);
   },
   /* 响应失败 */
   (error) => {
-    // console.dir(error);
     /* 返回失败的promise，值为错误信息 */
     return Promise.reject(error.message);
   }
