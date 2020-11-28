@@ -1,14 +1,13 @@
 <template>
-  <div>
-    footer
+  <div class="footer-outer">
     <div class="footer-list">
-      <dl v-for="dl in staticData" :key="dl.index">
-        <dt v-text="dl.dt"></dt>
-        <dd v-for="dd in dl.dd" :key="dd" v-html="dd"></dd>
+      <dl v-for="dl in staticData" :key="dl.index" class="footer-list-dl">
+        <dt v-text="dl.dt" class="footer-list-dt"></dt>
+        <dd v-for="dd in dl.dd" :key="dd" v-html="dd" class="footer-list-dd"></dd>
       </dl>
       <dl>
-        <dt>帮助中心</dt>
-        <dd><img src="./images/wx_cz.jpg" alt=""></dd>
+        <dt class="footer-list-dt">帮助中心</dt>
+        <dd class="footer-img"><img src="./images/wx_cz.jpg" alt="" /></dd>
       </dl>
     </div>
     <div></div>
@@ -47,10 +46,6 @@ export default {
           dt: "特色服务",
           dd: ["夺宝岛", "DIY装机", "延保服务", "尚品汇E卡", "尚品汇通信"],
         },
-        // {
-        //   dt: "帮助中心",
-        //   dd: [`<img src="./images/wx_cz.jpg" alt="">`],
-        // },
       ],
     };
   },
@@ -58,9 +53,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.footer-outer {
+  background-color: #eaeaea;
+}
 .footer-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.footer-list-dt {
+  color: #333;
+  font-size: 14px;
+  font-weight: bolder;
+  height: 18px;
+  width: 190px;
+}
+.footer-list-dd{
+  height: 18px;
 }
 
 </style>

@@ -28,12 +28,10 @@
         /></router-link>
       </div>
       <div class="header-form">
-        <form action="">
+        <form action="" @submit.prevent="search">
           <input type="text" class="header-search" v-model="searchText" />
           <button
-            @click.prevent="search"
             class="header-search-button"
-            type="button"
           >
             搜索
           </button>
