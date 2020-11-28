@@ -29,8 +29,12 @@
       </div>
       <div class="header-form">
         <form action="">
-          <input type="text" class="header-search" />
-          <button @click="search" class="header-search-button" type="button">
+          <input type="text" class="header-search" v-model="searchText" />
+          <button
+            @click.prevent="search"
+            class="header-search-button"
+            type="button"
+          >
             搜索
           </button>
         </form>
@@ -42,9 +46,16 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      /* 搜索内容 */
+      searchText: "",
+    };
+  },
   methods: {
     search() {
-      this.$router.push('/search')
+      /* 根据搜索内容跳转到指定路由并传递params参数 */
+      this.$router.push("/search" + (this.searchText && `/${this.searchText}`));
     },
   },
 };
