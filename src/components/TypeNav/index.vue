@@ -106,7 +106,7 @@ export default {
 
       this.$router.push({
         name: "search",
-        params: this.$route.params && this.$route.params,
+        params: this.$route.params,
         query: {
           categoryname,
           [`category${categorytype}Id`]: categoryid,
