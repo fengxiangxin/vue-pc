@@ -1,12 +1,8 @@
 <template>
   <!-- 商品分类导航 -->
-  <div
-    @mouseenter="isShowSort = true"
-    @mouseleave="isShowSort = false"
-    class="type-nav"
-  >
+  <div @mouseleave="isShowSort = false" class="type-nav">
     <div class="container">
-      <h2 class="all">全部商品分类</h2>
+      <h2 @mouseenter="isShowSort = true" class="all">全部商品分类</h2>
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -481,12 +477,13 @@ export default {
           [`category${categorytype}Id`]: categoryid,
         },
       });
+      this.isShowSort = false;
     },
   },
   mounted() {
+    /* 判断vuex如果有数据，则不再发送请求 */
+    if (this.categoryList.length) return;
     this.getCategoryList();
-    // const result = await reqBaseCategoryList();
-    // this.categoryList = result.slice(0, 15);
   },
 };
 </script>

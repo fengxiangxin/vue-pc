@@ -58,6 +58,7 @@ export default {
         /* 如果又query参数便传递query参数 */
         query: this.$route.query && this.$route.query,
       });
+      this.searchText = "";
     },
   },
 };
