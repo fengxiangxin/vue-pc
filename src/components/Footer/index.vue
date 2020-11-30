@@ -7,7 +7,7 @@
       </dl>
       <dl>
         <dt class="footer-list-dt">帮助中心</dt>
-        <dd class="footer-img"><img src="./images/wx_cz.jpg" alt="" /></dd>
+        <dd ><img class="footer-img" src="./images/wx_cz.jpg" alt="" /></dd>
       </dl>
     </div>
     <div></div>
@@ -63,6 +63,8 @@ export default {
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
+  border-bottom: 1px solid #e4e1e1;
+  border-top: 1px solid #e4e1e1;
 }
 .footer-list-dt {
   color: #333;
@@ -73,6 +75,9 @@ export default {
 }
 .footer-list-dd{
   height: 18px;
+}
+.footer-img{
+  height: 90px;
 }
 
 </style>

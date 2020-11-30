@@ -3,6 +3,8 @@ import axios from "axios";
 /* 引入进度条 */
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+/* 引入elementUI用于提示错误信息 */
+import { Message } from "element-ui";
 
 /* instance功能与axios类似，但是不完全相同 */
 const instance = axios.create({
@@ -40,12 +42,16 @@ instance.interceptors.response.use(
     }
     // console.log(response.data);
     /* code!==200说明出现错误，没有请求到数据，返回失败的promise */
+    /* 提示错误信息 */
+    Message.error(response.data.message);
     return Promise.reject(response.data.message);
   },
   /* 响应失败 */
   (error) => {
     /* 结束进度条 */
     NProgress.done();
+    /* 提示错误信息 */
+    Message.error(error.message);
     /* 返回失败的promise，值为错误信息 */
     return Promise.reject(error.message);
   }
