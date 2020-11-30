@@ -5,7 +5,8 @@ import App from "./App";
 import router from "./router";
 /* 引入vuex */
 import store from "./store";
-
+/* 引入mock模拟数据 */
+import "./mock/mockServer";
 /* 引入全局样式 */
 import "./styles/reset.css";
 
