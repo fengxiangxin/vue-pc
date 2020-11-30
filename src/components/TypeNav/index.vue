@@ -1,69 +1,61 @@
 <template>
   <!-- 商品分类导航 -->
-  <div @mouseleave="isShowSort = false" class="type-nav">
+  <div class="type-nav">
     <div class="container">
-      <h2 @mouseenter="isShowSort = true" class="all">全部商品分类</h2>
-      <nav class="nav">
-        <a href="###">服装城</a>
-        <a href="###">美妆馆</a>
-        <a href="###">尚品汇超市</a>
-        <a href="###">全球购</a>
-        <a href="###">闪购</a>
-        <a href="###">团购</a>
-        <a href="###">有趣</a>
-        <a href="###">秒杀</a>
-      </nav>
-      <div class="sort" v-show="isShowSort || isInHome">
-        <!-- 使用事件委托做点击跳转功能 -->
-        <div class="all-sort-list2" @click.prevent="goSearch">
-          <div
-            v-for="category in categoryList"
-            :key="category.categoryId"
-            class="item bo"
-          >
-            <h3>
-              <!-- 一级分类 -->
-              <!-- 使用自定义属性保存跳转数据 -->
-              <a
-                :data-categoryName="category.categoryName"
-                :data-categoryId="category.categoryId"
-                :data-categoryType="1"
-                href=""
-                >{{ category.categoryName }}</a
-              >
-            </h3>
-            <div class="item-list clearfix">
-              <div class="subitem">
-                <dl
-                  v-for="child in category.categoryChild"
-                  :key="child.categoryId"
-                  class="fore"
+      <div @mouseleave="isShowSort = false">
+        <h2 @mouseenter="isShowSort = true" class="all">全部商品分类</h2>
+
+        <div class="sort" v-show="isShowSort || isInHome">
+          <!-- 使用事件委托做点击跳转功能 -->
+          <div class="all-sort-list2" @click.prevent="goSearch">
+            <div
+              v-for="category in categoryList"
+              :key="category.categoryId"
+              class="item bo"
+            >
+              <h3>
+                <!-- 一级分类 -->
+                <!-- 使用自定义属性保存跳转数据 -->
+                <a
+                  :data-categoryName="category.categoryName"
+                  :data-categoryId="category.categoryId"
+                  :data-categoryType="1"
+                  href=""
+                  >{{ category.categoryName }}</a
                 >
-                  <!-- 二级分类 -->
-                  <dt>
-                    <a
-                      :data-categoryName="child.categoryName"
-                      :data-categoryId="child.categoryId"
-                      :data-categoryType="2"
-                      href=""
-                      >{{ child.categoryName }}</a
-                    >
-                  </dt>
-                  <dd>
-                    <!-- 三级分类 -->
-                    <em
-                      v-for="grandChild in child.categoryChild"
-                      :key="grandChild.categoryId"
-                    >
+              </h3>
+              <div class="item-list clearfix">
+                <div class="subitem">
+                  <dl
+                    v-for="child in category.categoryChild"
+                    :key="child.categoryId"
+                    class="fore"
+                  >
+                    <!-- 二级分类 -->
+                    <dt>
                       <a
-                        :data-categoryName="grandChild.categoryName"
-                        :data-categoryId="grandChild.categoryId"
-                        :data-categoryType="3"
+                        :data-categoryName="child.categoryName"
+                        :data-categoryId="child.categoryId"
+                        :data-categoryType="2"
                         href=""
-                        >{{ grandChild.categoryName }}</a
+                        >{{ child.categoryName }}</a
                       >
-                    </em>
-                    <!-- <em>
+                    </dt>
+                    <dd>
+                      <!-- 三级分类 -->
+                      <em
+                        v-for="grandChild in child.categoryChild"
+                        :key="grandChild.categoryId"
+                      >
+                        <a
+                          :data-categoryName="grandChild.categoryName"
+                          :data-categoryId="grandChild.categoryId"
+                          :data-categoryType="3"
+                          href=""
+                          >{{ grandChild.categoryName }}</a
+                        >
+                      </em>
+                      <!-- <em>
                       <a href="">文学</a>
                     </em>
                     <em>
@@ -72,12 +64,12 @@
                     <em>
                       <a href="">畅读VIP</a>
                     </em> -->
-                  </dd>
-                </dl>
+                    </dd>
+                  </dl>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- <div class="item">
+            <!-- <div class="item">
             <h3>
               <a href="">家用电器</a>
             </h3>
@@ -436,8 +428,19 @@
               </div>
             </div>
           </div> -->
+          </div>
         </div>
       </div>
+      <nav class="nav">
+        <a href="###">服装城</a>
+        <a href="###">美妆馆</a>
+        <a href="###">尚品汇超市</a>
+        <a href="###">全球购</a>
+        <a href="###">闪购</a>
+        <a href="###">团购</a>
+        <a href="###">有趣</a>
+        <a href="###">秒杀</a>
+      </nav>
     </div>
   </div>
 </template>
@@ -499,6 +502,8 @@ export default {
     position: relative;
 
     .all {
+      position: relative;
+      top: 2px;
       width: 210px;
       height: 45px;
       background-color: #e1251b;
@@ -507,6 +512,7 @@ export default {
       color: #fff;
       font-size: 14px;
       font-weight: bold;
+      // border-bottom: 2px solid #e1251b;
     }
 
     .nav {
