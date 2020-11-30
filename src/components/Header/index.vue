@@ -30,11 +30,7 @@
       <div class="header-form">
         <form action="" @submit.prevent="search">
           <input type="text" class="header-search" v-model="searchText" />
-          <button
-            class="header-search-button"
-          >
-            搜索
-          </button>
+          <button class="header-search-button">搜索</button>
         </form>
       </div>
     </div>
@@ -53,7 +49,15 @@ export default {
   methods: {
     search() {
       /* 根据搜索内容跳转到指定路由并传递params参数 */
-      this.$router.push("/search" + (this.searchText && `/${this.searchText}`));
+      const { searchText } = this;
+      this.$router.push({
+        name: "search",
+        params: {
+          searchText,
+        },
+        /* 如果又query参数便传递query参数 */
+        query: this.$route.query && this.$route.query,
+      });
     },
   },
 };

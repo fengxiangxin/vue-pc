@@ -1,6 +1,10 @@
 <template>
   <!-- 商品分类导航 -->
-  <div class="type-nav">
+  <div
+    @mouseenter="isShowSort = true"
+    @mouseleave="isShowSort = false"
+    class="type-nav"
+  >
     <div class="container">
       <h2 class="all">全部商品分类</h2>
       <nav class="nav">
@@ -13,7 +17,7 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort">
+      <div class="sort" v-show="isShowSort || isInHome">
         <!-- 使用事件委托做点击跳转功能 -->
         <div class="all-sort-list2" @click.prevent="goSearch">
           <div
@@ -447,11 +451,12 @@
 import { mapState, mapActions } from "vuex";
 export default {
   name: "TypeNav",
-  // data() {
-  //   // return {
-  //   //   categoryList: [],
-  //   // };
-  // },
+  data() {
+    return {
+      isInHome: this.$route.path === "/",
+      isShowSort: false,
+    };
+  },
   computed: {
     ...mapState({
       categoryList: (state) => {
@@ -462,7 +467,7 @@ export default {
   methods: {
     ...mapActions(["getCategoryList"]),
     goSearch(e) {
-      console.dir(e.target.dataset);
+      // console.dir(e.target.dataset);
       /* 如果点击a标签，则可以获取到这些属性值，这里的属性名必须是小写 */
       const { categoryname, categoryid, categorytype } = e.target.dataset;
       /* 判断如果不是a标签则不处理 */
@@ -470,6 +475,7 @@ export default {
 
       this.$router.push({
         name: "search",
+        params: this.$route.params && this.$route.params,
         query: {
           categoryname,
           [`category${categorytype}Id`]: categoryid,
@@ -519,7 +525,7 @@ export default {
     .sort {
       position: absolute;
       left: 0;
-      top: 45px;
+      top: 47px;
       width: 210px;
       height: 461px;
       position: absolute;

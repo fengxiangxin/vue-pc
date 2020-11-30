@@ -9,7 +9,7 @@ export default {
   actions: {
     async getCategoryList({ commit }) {
       const categoryList = await reqBaseCategoryList();
-      commit("GET_CATEGORY_LIST", categoryList);
+      commit("GET_CATEGORY_LIST", categoryList.slice(0, 15));
     },
   },
   mutations: {
