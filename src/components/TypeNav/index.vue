@@ -14,7 +14,8 @@
         <a href="###">秒杀</a>
       </nav>
       <div class="sort">
-        <div class="all-sort-list2">
+        <!-- 使用事件委托做点击跳转功能 -->
+        <div class="all-sort-list2" @click.prevent="goSearch">
           <div
             v-for="category in categoryList"
             :key="category.categoryId"
@@ -22,7 +23,14 @@
           >
             <h3>
               <!-- 一级分类 -->
-              <a href="">{{ category.categoryName }}</a>
+              <!-- 使用自定义属性保存跳转数据 -->
+              <a
+                :data-categoryName="category.categoryName"
+                :data-categoryId="category.categoryId"
+                :data-categoryType="1"
+                href=""
+                >{{ category.categoryName }}</a
+              >
             </h3>
             <div class="item-list clearfix">
               <div class="subitem">
@@ -33,7 +41,13 @@
                 >
                   <!-- 二级分类 -->
                   <dt>
-                    <a href="">{{ child.categoryName }}</a>
+                    <a
+                      :data-categoryName="child.categoryName"
+                      :data-categoryId="child.categoryId"
+                      :data-categoryType="2"
+                      href=""
+                      >{{ child.categoryName }}</a
+                    >
                   </dt>
                   <dd>
                     <!-- 三级分类 -->
@@ -41,7 +55,13 @@
                       v-for="grandChild in child.categoryChild"
                       :key="grandChild.categoryId"
                     >
-                      <a href="">{{ grandChild.categoryName }}</a>
+                      <a
+                        :data-categoryName="grandChild.categoryName"
+                        :data-categoryId="grandChild.categoryId"
+                        :data-categoryType="3"
+                        href=""
+                        >{{ grandChild.categoryName }}</a
+                      >
                     </em>
                     <!-- <em>
                       <a href="">文学</a>
@@ -441,6 +461,21 @@ export default {
   },
   methods: {
     ...mapActions(["getCategoryList"]),
+    goSearch(e) {
+      console.dir(e.target.dataset);
+      /* 如果点击a标签，则可以获取到这些属性值，这里的属性名必须是小写 */
+      const { categoryname, categoryid, categorytype } = e.target.dataset;
+      /* 判断如果不是a标签则不处理 */
+      if (!categoryid) return;
+
+      this.$router.push({
+        name: "search",
+        query: {
+          categoryname,
+          [`category${categorytype}Id`]: categoryid,
+        },
+      });
+    },
   },
   mounted() {
     this.getCategoryList();

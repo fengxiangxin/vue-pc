@@ -53,6 +53,7 @@ export default new vueRouter({
     },
     {
       /* 搜索页面路由 */
+      name: "search",
       path: "/search/:searchText?",
       component: Search,
     },
