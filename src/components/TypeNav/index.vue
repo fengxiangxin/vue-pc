@@ -41,7 +41,7 @@
                       v-for="grandChild in child.categoryChild"
                       :key="grandChild.categoryId"
                     >
-                      <a href="">{{grandChild.categoryName}}</a>
+                      <a href="">{{ grandChild.categoryName }}</a>
                     </em>
                     <!-- <em>
                       <a href="">文学</a>
@@ -423,17 +423,29 @@
 </template>
 
 <script>
-import { reqBaseCategoryList } from "@api/home";
+// import { reqBaseCategoryList } from "@api/home";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "TypeNav",
-  data() {
-    return {
-      categoryList: [],
-    };
+  // data() {
+  //   // return {
+  //   //   categoryList: [],
+  //   // };
+  // },
+  computed: {
+    ...mapState({
+      categoryList: (state) => {
+        return state.home.categoryList;
+      },
+    }),
   },
-  async mounted() {
-    const result = await reqBaseCategoryList();
-    this.categoryList = result.slice(0, 15);
+  methods: {
+    ...mapActions(["getCategoryList"]),
+  },
+  mounted() {
+    this.getCategoryList();
+    // const result = await reqBaseCategoryList();
+    // this.categoryList = result.slice(0, 15);
   },
 };
 </script>
