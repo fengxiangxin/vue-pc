@@ -52,7 +52,7 @@ export default {
       const { searchText } = this;
       this.$router.push({
         name: "search",
-        params: {
+        params: searchText && {
           searchText,
         },
         /* 如果又query参数便传递query参数 */
