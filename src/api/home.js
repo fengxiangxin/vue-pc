@@ -17,7 +17,7 @@ export const reqHomeBanners = () => {
   });
 };
 
-/*  */
+/* 请求楼层数据 */
 export const reqFloors = () => {
   return request({
     method: "GET",

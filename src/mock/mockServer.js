@@ -14,5 +14,5 @@ Mock.mock("/api/banners", "get", {
 
 Mock.mock("/api/floors", "get", {
   code: 200,
-  "data|3-5": floors,
+  "data|2": floors,
 });
