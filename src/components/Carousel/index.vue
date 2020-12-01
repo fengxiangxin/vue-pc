@@ -1,5 +1,5 @@
 <template>
-  <div class="swiper-container" id="mySwiper">
+  <div class="swiper-container" ref="swiper">
     <div class="swiper-wrapper">
       <div
         v-for="carouser in carouserList"
@@ -46,33 +46,50 @@ export default {
       /* 如果swiper已经存在，则不允许重复new */
       if (this.swiper) return;
       this.$nextTick(() => {
-        this.swiper = new Swiper(".swiper-container", {
-          /* 循环模式 */
-          loop: true,
-          /* 自动播放 */
-          autoplay: {
-            /* 间隔时间 */
-            delay: 2000,
-            /* 当用户点击下一页后，继续自动播放 */
-            disableOnInteraction: false,
-          },
-          /* 分页器 */
-          pagination: {
-            /* 分页器元素 */
-            el: ".swiper-pagination",
-            /* 是否允许点击 */
-            clickable: true,
-          },
-          /* 导航按钮 */
-          navigation: {
-            /* 下一张 */
-            nextEl: ".swiper-button-next",
-            /* 上一张 */
-            prevEl: ".swiper-button-prev",
-          },
-        });
+        this.initSwiper();
       });
     },
+  },
+  methods: {
+    initSwiper() {
+      /* $refs选中DOM元素 */
+      /* 使用this.$refs.swiper防止复用的轮播图组件选中到同一个轮播图元素 */
+      this.swiper = new Swiper(this.$refs.swiper, {
+        /* 循环模式 */
+        loop: true,
+        /* 自动播放 */
+        autoplay: {
+          /* 间隔时间 */
+          delay: 2000,
+          /* 当用户点击下一页后，继续自动播放 */
+          disableOnInteraction: false,
+        },
+        /* 分页器 */
+        pagination: {
+          /* 分页器元素 */
+          el: ".swiper-pagination",
+          /* 是否允许点击 */
+          clickable: true,
+        },
+        /* 导航按钮 */
+        navigation: {
+          /* 下一张 */
+          nextEl: ".swiper-button-next",
+          /* 上一张 */
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    },
+  },
+  mounted() {
+    /**
+     * 这个组件挂载时有两种情况
+     * 1. 挂载时已经有数据，则需要立即new Swiper()
+     * 2. 挂载时没有数据，则需要等待watch监视到数据变化才new Swiper()
+     */
+    /* 如果没有数据则使用watch */
+    if (!this.carouserList.length) return;
+    this.initSwiper();
   },
 };
 </script>

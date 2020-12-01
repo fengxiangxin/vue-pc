@@ -1,15 +1,11 @@
 <template>
-  <div class="floor">
+  <div v-if="floor" class="floor">
     <div class="py-container">
       <div class="title clearfix">
         <h3 class="fl">{{ floor.name }}</h3>
         <div class="fr">
           <ul class="nav-tabs clearfix">
-            <li
-              v-for="(nav, index) in floor.navList"
-              :key="index"
-              class="active"
-            >
+            <li v-for="(nav, index) in floor.navList" :key="index">
               <a :href="nav.url" data-toggle="tab">{{ nav.text }}</a>
             </li>
           </ul>
@@ -63,6 +59,11 @@ export default {
   name: "Floor",
   props: {
     floor: Object,
+  },
+  watch: {
+    floor() {
+      console.log(this.floor);
+    },
   },
   components: {
     Carousel,
@@ -198,6 +199,7 @@ export default {
 
           .center {
             border: 1px solid #e4e4e4;
+            border-bottom: none;
           }
         }
       }

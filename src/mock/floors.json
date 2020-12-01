@@ -3,7 +3,7 @@
     "id|+1": 1,
     "name": "@ctitle(4)",
     "keywords|6": ["@ctitle(3,6)"],
-    "imgUrl": "@image('210x252','@color')",
+    "imgUrl": "@image('210x250','@color')",
     "navList|6-10": [
       {
         "url": "###",
