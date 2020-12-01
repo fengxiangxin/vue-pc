@@ -10,7 +10,7 @@
     <!-- 猜你喜欢 -->
     <Like />
     <!--楼层-->
-    <Floor />
+    <Floor v-for="floor in floors" :key="floor.id" :floor="floor" />
     <!--楼层-->
     <Floor />
     <!--商标-->
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 import Brand from "./Brand/Brand";
 import Floor from "./Floor/Floor";
 import Like from "./Like/Like";
@@ -36,6 +38,17 @@ export default {
     Rank,
     TodayRecommend,
     TypeNav,
+  },
+  computed: {
+    ...mapState({
+      floors: (state) => state.home.floors,
+    }),
+  },
+  methods: {
+    ...mapActions(["getHomeFloors"]),
+  },
+  mounted() {
+    this.getHomeFloors();
   },
 };
 </script>
