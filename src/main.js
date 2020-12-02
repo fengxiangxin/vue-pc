@@ -9,6 +9,8 @@ import store from "./store";
 import "./mock/mockServer";
 /* 引入全局样式 */
 import "./styles/reset.css";
+/* 引入字体图标 */
+import "./styles/iconfont.css";
 
 import "./plugins/element.js";
 
