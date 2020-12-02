@@ -50,7 +50,8 @@ export default {
     search() {
       /* 根据搜索内容跳转到指定路由并传递params参数 */
       const { searchText } = this;
-      this.$router.push({
+
+      this.$router[this.$route.name === "search" ? "replace" : "push"]({
         name: "search",
         params: searchText && {
           searchText,

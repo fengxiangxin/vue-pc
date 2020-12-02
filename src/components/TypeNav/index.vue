@@ -104,7 +104,7 @@ export default {
       /* 判断如果不是a标签则不处理 */
       if (!categoryid) return;
 
-      this.$router.push({
+      this.$router[this.$route.name === "search" ? "replace" : "push"]({
         name: "search",
         params: this.$route.params,
         query: {
