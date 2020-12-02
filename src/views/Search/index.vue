@@ -12,22 +12,31 @@
           </ul>
           <ul class="fl sui-tag">
             <li class="with-x" v-show="options.keyword" @click="delKeyword">
-              {{ options.keyword }}<i>×</i>
+              关键字：{{ options.keyword }}<i>×</i>
             </li>
             <li
               class="with-x"
               v-show="options.categoryName"
               @click="delCategory"
             >
-              {{ options.categoryName }}<i>×</i>
+              分类名称：{{ options.categoryName }}<i>×</i>
             </li>
-            <!-- <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li> -->
+            <li class="with-x" v-show="options.trademark" @click="delTrademark">
+              品牌：{{ options.trademark }}<i>×</i>
+            </li>
+            <li
+              v-for="(prop, index) in options.props"
+              :key="index"
+              class="with-x"
+              @click="delProps(index)"
+            >
+              {{ prop }}<i>×</i>
+            </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector :addTrademark="addTrademark" @add-props="addProps" />
 
         <!--details-->
         <div class="details clearfix">
@@ -35,23 +44,23 @@
             <div class="navbar-inner filter">
               <ul class="sui-nav">
                 <li class="active">
-                  <a href="#">综合</a>
+                  <a href="###">综合</a>
                 </li>
                 <li>
-                  <a href="#">销量</a>
+                  <a href="###">销量</a>
                 </li>
                 <li>
-                  <a href="#">新品</a>
+                  <a href="###">新品</a>
                 </li>
                 <li>
-                  <a href="#">评价</a>
+                  <a href="###">评价</a>
                 </li>
                 <li>
-                  <a href="#">价格⬆</a>
+                  <a href="###">价格⬆</a>
                 </li>
-                <li>
-                  <a href="#">价格⬇</a>
-                </li>
+                <!-- <li>
+                  <a href="###">价格⬇</a>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -193,6 +202,27 @@ export default {
         name: "search",
         params: this.$route.params,
       });
+    },
+    /* 添加品牌，从子组件中获取数据 */
+    addTrademark(trademark) {
+      this.options.trademark = trademark;
+      /* 每次筛选信息改变都需要重新发送请求 */
+      this.updateProductList();
+    },
+    /* 删除品牌 */
+    delTrademark() {
+      this.options.trademark = "";
+      this.updateProductList();
+    },
+    /* 添加属性，使用自定义事件传参 */
+    addProps(prop) {
+      this.options.props.push(prop);
+      this.updateProductList();
+    },
+    /* 删除属性 */
+    delProps(index) {
+      this.options.props.splice(index, 1);
+      this.updateProductList();
     },
   },
   mounted() {
