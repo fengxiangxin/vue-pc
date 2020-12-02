@@ -108,7 +108,7 @@ export default {
         name: "search",
         params: this.$route.params,
         query: {
-          categoryname,
+          categoryName: categoryname,
           [`category${categorytype}Id`]: categoryid,
         },
       });

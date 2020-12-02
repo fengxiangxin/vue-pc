@@ -11,10 +11,18 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x">手机</li>
-            <li class="with-x">iphone<i>×</i></li>
-            <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li>
+            <li class="with-x" v-show="options.keyword" @click="delKeyword">
+              {{ options.keyword }}<i>×</i>
+            </li>
+            <li
+              class="with-x"
+              v-show="options.categoryName"
+              @click="delCategory"
+            >
+              {{ options.categoryName }}<i>×</i>
+            </li>
+            <!-- <li class="with-x">华为<i>×</i></li>
+            <li class="with-x">OPPO<i>×</i></li> -->
           </ul>
         </div>
 
@@ -130,17 +138,65 @@ import TypeNav from "@components/TypeNav";
 import SearchSelector from "./SearchSelector/SearchSelector";
 export default {
   name: "Search",
+  data() {
+    return {
+      options: {
+        category1Id: "",
+        category2Id: "",
+        category3Id: "",
+        categoryName: "",
+        keyword: "",
+        props: [],
+        trademark: "",
+        order: "",
+        pageNo: 1,
+        pageSize: 5,
+      },
+    };
+  },
   computed: {
     ...mapGetters(["goodsList"]),
-    // ...maoState({
-    //   productList: (state) => state.search.productList,
-    // }),
+  },
+  watch: {
+    $route() {
+      this.updateProductList();
+    },
   },
   methods: {
     ...mapActions(["getProductList"]),
+    updateProductList() {
+      const { searchText: keyword } = this.$route.params;
+      const options = {
+        ...this.options,
+        keyword,
+        ...this.$route.query,
+      };
+      /* 直接给options赋值也可以触发响应式 */
+      this.options = options;
+      this.getProductList(options);
+    },
+    /* 删除关键字 */
+    delKeyword() {
+      this.options.keyword = "";
+      this.$router.replace({
+        name: "search",
+        query: this.$route.query,
+      });
+    },
+    /* 删除分类 */
+    delCategory() {
+      this.options.category1Id = "";
+      this.options.category2Id = "";
+      this.options.category3Id = "";
+      this.options.categoryName = "";
+      this.$router.replace({
+        name: "search",
+        params: this.$route.params,
+      });
+    },
   },
   mounted() {
-    this.getProductList();
+    this.updateProductList();
   },
   components: {
     TypeNav,

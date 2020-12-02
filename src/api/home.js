@@ -24,3 +24,11 @@ export const reqFloors = () => {
     url: "/floors",
   });
 };
+
+/*  */
+export const reqHomeLike = () => {
+  return request({
+    method: "GET",
+    url: "/home/like",
+  });
+};

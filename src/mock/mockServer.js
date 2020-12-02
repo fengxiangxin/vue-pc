@@ -6,6 +6,8 @@ import banners from "./banners";
 /*  */
 import floors from "./floors";
 
+import likes from "./likes.json";
+
 /* 这里的请求方式不能是大写 */
 Mock.mock("/api/banners", "get", {
   code: 200,
@@ -15,4 +17,9 @@ Mock.mock("/api/banners", "get", {
 Mock.mock("/api/floors", "get", {
   code: 200,
   "data|2": floors,
+});
+
+Mock.mock("/api/home/like", "get", {
+  code: 200,
+  "data|6": likes,
 });
