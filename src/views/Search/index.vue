@@ -145,35 +145,46 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
+          <!-- 分页器 -->
+          <!-- <div class="fr page">
             <div class="sui-pagination clearfix">
               <ul>
                 <li class="prev disabled">
                   <a href="#">«上一页</a>
                 </li>
                 <li class="active">
-                  <a href="#">1</a>
+                  <a>1</a>
                 </li>
                 <li>
-                  <a href="#">2</a>
+                  <a>2</a>
                 </li>
                 <li>
-                  <a href="#">3</a>
+                  <a>3</a>
                 </li>
                 <li>
-                  <a href="#">4</a>
+                  <a>4</a>
                 </li>
                 <li>
-                  <a href="#">5</a>
+                  <a>5</a>
                 </li>
                 <li class="dotted"><span>...</span></li>
                 <li class="next">
-                  <a href="#">下一页»</a>
+                  <a>下一页»</a>
                 </li>
               </ul>
               <div><span>共10页&nbsp;</span></div>
             </div>
-          </div>
+          </div> -->
+          <el-pagination
+            @size-change="sizeChange"
+            @current-change="currentChange"
+            background
+            layout="prev, pager, next, total, sizes, jumper"
+            :total="1000"
+            :page-sizes="[5, 10, 20, 30]"
+            :page-size="5"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -280,6 +291,16 @@ export default {
         this.order2 = "asc";
       }
       this.options.order = order + ":" + this["order" + order];
+      this.updateProductList();
+    },
+    /* 当每页条数变化时，触发函数会自动传递一个参数 */
+    sizeChange(pageSize) {
+      this.options.pageSize = pageSize;
+      this.updateProductList();
+    },
+    /* 当页码发生变化时 */
+    currentChange(pageNo) {
+      this.options.pageNo = pageNo;
       this.updateProductList();
     },
   },
