@@ -43,26 +43,62 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="###"
+                <li
+                  :class="{ active: options.order.indexOf('1') > -1 }"
+                  @click="setOrder('1')"
+                >
+                  <a
                     >综合
+                    <span
+                      :class="[
+                        'iconfont',
+                        order1 === 'desc' ? 'icon-down' : 'icon-up',
+                      ]"
+                    ></span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    >销量
                     <span class="iconfont icon-down"></span>
                   </a>
                 </li>
                 <li>
-                  <a href="###">销量</a>
+                  <a
+                    >新品
+                    <span class="iconfont icon-down"></span>
+                  </a>
                 </li>
                 <li>
-                  <a href="###">新品</a>
+                  <a
+                    >评价
+                    <span class="iconfont icon-down"></span>
+                  </a>
                 </li>
-                <li>
-                  <a href="###">评价</a>
-                </li>
-                <li>
-                  <a href="###"
+                <li
+                  :class="{ active: options.order.indexOf('2') > -1 }"
+                  @click="setOrder('2')"
+                >
+                  <a
                     >价格
-                    <i class="iconfont icon-arrow-up-filling"></i>
-                    <i class="iconfont icon-arrow-down-filling"></i>
+                    <i
+                      :class="[
+                        'iconfont',
+                        'icon-arrow-up-filling',
+                        order2 !== 'asc' &&
+                          options.order.indexOf('2') > -1 &&
+                          'deactive',
+                      ]"
+                    ></i>
+                    <i
+                      :class="[
+                        'iconfont',
+                        'icon-arrow-down-filling',
+                        order2 !== 'desc' &&
+                          options.order.indexOf('2') > -1 &&
+                          'deactive',
+                      ]"
+                    ></i>
                   </a>
                 </li>
               </ul>
@@ -161,10 +197,12 @@ export default {
         keyword: "",
         props: [],
         trademark: "",
-        order: "",
+        order: "1:desc",
         pageNo: 1,
         pageSize: 5,
       },
+      order1: "desc",
+      order2: "desc",
     };
   },
   computed: {
@@ -226,6 +264,22 @@ export default {
     /* 删除属性 */
     delProps(index) {
       this.options.props.splice(index, 1);
+      this.updateProductList();
+    },
+    /* 设置排序方式 */
+    setOrder(order) {
+      /* 从options中获取到当前的排序方式 */
+      let orderNum = this.options.order.split(":")[0];
+      // let orderType = this["order" + order];
+      /* 如果当前排序方式与点击的按钮相同，即为第二次点击，改变升降序 */
+      if (orderNum === order) {
+        this["order" + order] =
+          this["order" + order] === "desc" ? "asc" : "desc";
+      } else if (order === "2") {
+        /* 如果第一次点击的是按价格排序，则初始化为升序 */
+        this.order2 = "asc";
+      }
+      this.options.order = order + ":" + this["order" + order];
       this.updateProductList();
     },
   },
@@ -339,6 +393,7 @@ export default {
             li {
               float: left;
               line-height: 18px;
+              width: 69.55px;
 
               a {
                 display: block;
@@ -347,19 +402,24 @@ export default {
                 color: #777;
                 text-decoration: none;
                 position: relative;
+
                 i:first-child {
                   position: absolute;
                   top: 7px;
-                  right: 1px;
+                  right: 16px;
                   font-size: 12px;
                 }
                 i:last-child {
                   position: absolute;
                   bottom: 7px;
-                  right: 1px;
+                  right: 16px;
                   font-size: 12px;
+                  margin-right: 0;
                 }
-                span{
+                i.deactive {
+                  opacity: 0.5;
+                }
+                span {
                   font-size: 12px;
                 }
               }
