@@ -145,46 +145,21 @@
               </li>
             </ul>
           </div>
-          <!-- 分页器 -->
-          <!-- <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a>1</a>
-                </li>
-                <li>
-                  <a>2</a>
-                </li>
-                <li>
-                  <a>3</a>
-                </li>
-                <li>
-                  <a>4</a>
-                </li>
-                <li>
-                  <a>5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a>下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div> -->
           <el-pagination
             @size-change="sizeChange"
             @current-change="currentChange"
             background
             layout="prev, pager, next, total, sizes, jumper"
-            :total="1000"
+            :total="100"
             :page-sizes="[5, 10, 20, 30]"
             :page-size="5"
           >
           </el-pagination>
+          <Pagination
+            :total="50"
+            :page-size="5"
+            :current-page="options.pageNo"
+          />
         </div>
       </div>
     </div>
@@ -195,6 +170,7 @@
 import { mapActions, mapGetters } from "vuex";
 
 import TypeNav from "@components/TypeNav";
+import Pagination from "@components/Pagination";
 import SearchSelector from "./SearchSelector/SearchSelector";
 export default {
   name: "Search",
@@ -310,6 +286,7 @@ export default {
   components: {
     TypeNav,
     SearchSelector,
+    Pagination,
   },
 };
 </script>

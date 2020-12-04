@@ -32,3 +32,10 @@ export const reqHomeLike = () => {
     url: "/home/like",
   });
 };
+/*  */
+export const reqHomeRecommend = () => {
+  return request({
+    method: "GET",
+    url: "/home/recommend",
+  });
+};

@@ -8,10 +8,10 @@
             <h3>今日推荐</h3>
           </div>
         </li>
-        <li class="banner">
-          <img src="./images/today01.png" />
+        <li class="banner" v-for="recommend in recommends" :key="recommend.id">
+          <img :src="recommend.imgUrl" />
         </li>
-        <li class="banner">
+        <!-- <li class="banner">
           <img src="./images/today02.png" />
         </li>
         <li class="banner">
@@ -19,16 +19,25 @@
         </li>
         <li class="banner">
           <img src="./images/today04.png" />
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import { reqHomeRecommend } from "@api/home";
 export default {
-  name: 'TodayRecommend',
-}
+  name: "TodayRecommend",
+  data() {
+    return {
+      recommends: [],
+    };
+  },
+  async mounted() {
+    this.recommends = await reqHomeRecommend();
+  },
+};
 </script>
 
 <style  lang="less" scoped>
