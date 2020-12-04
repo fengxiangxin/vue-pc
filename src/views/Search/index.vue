@@ -109,7 +109,7 @@
               <li class="yui3-u-1-5" v-for="goods in goodsList" :key="goods.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank">
+                    <a target="_blank">
                       <img :src="goods.defaultImg" />
                     </a>
                   </div>
@@ -122,7 +122,6 @@
                   <div class="attr">
                     <a
                       target="_blank"
-                      href="item.html"
                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
                       >{{ goods.title }}</a
                     >
@@ -131,10 +130,7 @@
                     <i class="command">已有<span>2000</span>人评价</i>
                   </div>
                   <div class="operate">
-                    <a
-                      href="success-cart.html"
-                      target="_blank"
-                      class="sui-btn btn-bordered btn-danger"
+                    <a target="_blank" class="sui-btn btn-bordered btn-danger"
                       >加入购物车</a
                     >
                     <a href="javascript:void(0);" class="sui-btn btn-bordered"
@@ -145,20 +141,22 @@
               </li>
             </ul>
           </div>
-          <el-pagination
+          <!-- <el-pagination
             @size-change="sizeChange"
             @current-change="currentChange"
             background
             layout="prev, pager, next, total, sizes, jumper"
-            :total="100"
+            :total="total"
             :page-sizes="[5, 10, 20, 30]"
             :page-size="5"
           >
-          </el-pagination>
+          </el-pagination> -->
           <Pagination
-            :total="50"
+            :total="total"
             :page-size="5"
             :current-page="options.pageNo"
+            @size-change="sizeChange"
+            @current-change="currentChange"
           />
         </div>
       </div>
@@ -193,7 +191,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["goodsList"]),
+    ...mapGetters(["goodsList", "total"]),
   },
   watch: {
     $route() {

@@ -1,15 +1,48 @@
 <template>
   <div class="pagination">
-    <button>上一页</button>
+    <!-- 上一页 -->
+    <button :disabled="myCurrentPage <= 1" @click="myCurrentPage--">
+      上一页
+    </button>
+    <!-- 第一页 -->
+    <button :class="{ active: myCurrentPage === 1 }" @click="myCurrentPage = 1">
+      1
+    </button>
+    <!-- 左跳转 -->
+    <button
+      v-show="!(myCurrentPage <= 4)"
+      @click="myCurrentPage = myCurrentPage - 5 < 1 ? 1 : myCurrentPage - 5"
+    >
+      ···
+    </button>
     <button
       :class="{ active: item === myCurrentPage }"
       v-for="item in mapBtnCount"
       :key="item"
-      @click="setCurrentPage(item)"
+      @click="myCurrentPage = item"
     >
       {{ item }}
     </button>
-    <button>下一页</button>
+    <!-- 右跳转 -->
+    <button
+      v-show="!(myCurrentPage >= pages - 3)"
+      @click="
+        myCurrentPage = myCurrentPage + 5 > pages ? pages : myCurrentPage + 5
+      "
+    >
+      ···
+    </button>
+    <!-- 最后一页 -->
+    <button
+      :class="{ active: myCurrentPage === pages }"
+      @click="myCurrentPage = pages"
+    >
+      {{ pages }}
+    </button>
+    <!-- 下一页 -->
+    <button :disabled="myCurrentPage >= pages" @click="myCurrentPage++">
+      下一页
+    </button>
   </div>
 </template>
 
@@ -47,48 +80,36 @@ export default {
     },
   },
   computed: {
+    pages() {
+      /* 总页数必须为整数，向上取整 */
+      const { total, pageSize } = this;
+      return Math.ceil(total / pageSize);
+    },
     mapBtnCount() {
-      const { total, pageSize, myCurrentPage } = this;
-      /* 计算页数 */
-      const pages = total / pageSize;
+      const { myCurrentPage, pages } = this;
       /* 如果页数小于8 */
       if (pages <= 8) {
         return pages;
       } else {
         if (myCurrentPage <= 4) {
-          return [1, 2, 3, 4, 5, 6, "...", pages];
+          return [2, 3, 4, 5, 6];
         } else if (myCurrentPage >= pages - 3) {
-          return [
-            1,
-            "...",
-            pages - 5,
-            pages - 4,
-            pages - 3,
-            pages - 2,
-            pages - 1,
-            pages,
-          ];
+          return [pages - 5, pages - 4, pages - 3, pages - 2, pages - 1];
         } else {
           return [
-            1,
-            "...",
             myCurrentPage - 2,
             myCurrentPage - 1,
             myCurrentPage,
             myCurrentPage + 1,
             myCurrentPage + 2,
-            "...",
-            pages,
           ];
         }
       }
     },
   },
-  methods: {
-    setCurrentPage(item) {
-      if (item !== "...") {
-        this.myCurrentPage = item;
-      }
+  watch: {
+    myCurrentPage(newVal) {
+      this.$emit("current-change", newVal);
     },
   },
 };

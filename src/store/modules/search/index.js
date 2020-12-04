@@ -22,7 +22,7 @@ export default {
       return state.productList.goodsList;
     },
     total(state) {
-      return state.productList.todal;
+      return state.productList.total;
     },
   },
   actions: {
