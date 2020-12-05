@@ -146,11 +146,12 @@
             @current-change="currentChange"
             background
             layout="prev, pager, next, total, sizes, jumper"
-            :total="total"
+            :total="100"
             :page-sizes="[5, 10, 20, 30]"
             :page-size="5"
-          >
-          </el-pagination> -->
+            :pagerCount="11"
+          > 
+          </el-pagination>-->
           <Pagination
             :total="total"
             :page-size="5"

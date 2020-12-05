@@ -5,3 +5,5 @@
 2. Not allowed to load local resource: blob:http://localhost:9528/a292c33e-6a6b-45a8-9fda-a8ca2c260ce0，不允许加载本地资源
    资源地址为本地地址，但是这个地址没有对应资源，所以报错
    解决办法，修正资源地址
+
+   The update clause in this loop moves the variable in the wrong direction  for-direction
