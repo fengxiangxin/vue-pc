@@ -5,7 +5,11 @@
       上一页
     </button>
     <!-- 第一页 -->
-    <button :class="{ active: myCurrentPage === 1 }" @click="myCurrentPage = 1">
+    <button
+      v-show="pages > 8"
+      :class="{ active: myCurrentPage === 1 }"
+      @click="myCurrentPage = 1"
+    >
       1
     </button>
     <!-- 左跳转 -->
@@ -34,6 +38,7 @@
     </button>
     <!-- 最后一页 -->
     <button
+      v-show="pages > 8"
       :class="{ active: myCurrentPage === pages }"
       @click="myCurrentPage = pages"
     >
