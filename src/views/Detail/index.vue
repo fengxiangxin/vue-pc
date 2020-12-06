@@ -386,16 +386,21 @@ export default {
     ...mapGetters(["categoryView", "spuSaleAttrList", "skuInfo"]),
   },
   methods: {
-    ...mapActions(["getProductDetail"]),
+    ...mapActions(["getProductDetail", "updateCartCount"]),
     updateCurrentImgIndex(index) {
       this.currentImgIndex = index;
     },
     /* 加入购物车功能 */
     async addCart() {
       try {
-        
+        await this.updateCartCount({
+          skuId: this.skuInfo.id,
+          skuNum: this.skuNum,
+        });
+        /* 跳转到添加购物车成功页码 */
+        this.$router.push(`/addcartsuccess?skuNum=${this.skuNum}`);
       } catch (error) {
-        
+        console.log(error);
       }
     },
   },

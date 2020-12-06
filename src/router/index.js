@@ -6,6 +6,8 @@ import Login from "../views/Login";
 import Search from "../views/Search";
 import Register from "../views/Register";
 import Detail from "../views/Detail";
+import AddCartSuccess from "../views/AddCartSuccess";
+import ShopCart from "../views/ShopCart";
 
 import VueRouter from "vue-router";
 
@@ -64,6 +66,18 @@ export default new vueRouter({
       name: "detail",
       path: "/detail/:id",
       component: Detail,
+    },
+    {
+      /* 添加购物车成功 */
+      name: "addcartsuccess",
+      path: "/addcartsuccess",
+      component: AddCartSuccess,
+    },
+    {
+      /* 购物车 */
+      name: "shopcart",
+      path: "shopcart",
+      component: ShopCart,
     },
   ],
   /* 路由切换时设置滚动条的位置为最顶部 */
