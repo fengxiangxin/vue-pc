@@ -1,4 +1,4 @@
-import { productDetail } from "@api/detail";
+import { reqDeatail } from "@api/detail";
 
 export default {
   state: {
@@ -20,7 +20,7 @@ export default {
   },
   actions: {
     async getProductDetail({ commit }, id) {
-      const productDetail = await productDetail(id);
+      const productDetail = await reqDeatail(id);
       commit("GET_PRODUCT_DETAIL", productDetail);
     },
   },

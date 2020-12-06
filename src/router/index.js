@@ -5,6 +5,8 @@ import Home from "../views/Home";
 import Login from "../views/Login";
 import Search from "../views/Search";
 import Register from "../views/Register";
+import Detail from "../views/Detail";
+
 import VueRouter from "vue-router";
 
 /**
@@ -57,5 +59,15 @@ export default new vueRouter({
       path: "/search/:searchText?",
       component: Search,
     },
+    {
+      /* 详情页面路由 */
+      name: "detail",
+      path: "/detail/:id",
+      component: Detail,
+    },
   ],
+  /* 路由切换时设置滚动条的位置为最顶部 */
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
 });

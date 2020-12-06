@@ -119,7 +119,7 @@ export default {
       if (myCurrentPage <= 1 + offsetCount) {
         base = 1 + offsetCount;
       }
-      /* 如果当前页码较大，则末尾页码减偏移量为基准 */
+      /* 如果当前页码较大，则以末尾页码减偏移量为基准 */
       if (myCurrentPage >= pages - offsetCount) {
         base = pages - offsetCount;
       }
