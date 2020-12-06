@@ -128,7 +128,7 @@
                 <a href="javascript:" class="plus">+</a>
                 <a href="javascript:" class="mins">-</a>
               </div>
-              <div class="add">
+              <div class="add" @click="addCart">
                 <a href="javascript:">加入购物车</a>
               </div>
             </div>
@@ -389,6 +389,14 @@ export default {
     ...mapActions(["getProductDetail"]),
     updateCurrentImgIndex(index) {
       this.currentImgIndex = index;
+    },
+    /* 加入购物车功能 */
+    async addCart() {
+      try {
+        
+      } catch (error) {
+        
+      }
     },
   },
   mounted() {

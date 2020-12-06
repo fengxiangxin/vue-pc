@@ -5,6 +5,10 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 /* 引入elementUI用于提示错误信息 */
 import { Message } from "element-ui";
+/* 在拦截器中加上用户临时id */
+import getUserTempID from "@utils/getUserTempID";
+
+const userTempID = getUserTempID();
 
 /* instance功能与axios类似，但是不完全相同 */
 const instance = axios.create({
@@ -21,6 +25,10 @@ instance.interceptors.request.use(
      * config是请求的配置对象
      * 包含请求方式，请求地址，请求参数等
      */
+
+    /* 在请求头中加上临时用户id */
+    config.headers.userTempID = userTempID;
+
     return config;
   }
   /* 这里有一个处理失败的回调函数，但是这个回调函数必定不会触发，所以不写 */
