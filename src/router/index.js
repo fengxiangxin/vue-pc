@@ -76,7 +76,7 @@ export default new vueRouter({
     {
       /* 购物车 */
       name: "shopcart",
-      path: "shopcart",
+      path: "/shopcart",
       component: ShopCart,
     },
   ],

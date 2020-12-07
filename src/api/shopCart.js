@@ -4,7 +4,7 @@ import request from "@utils/request";
 export const reqCartList = () => {
   return request({
     method: "GET",
-    url: "/car/cartList",
+    url: "/cart/cartList",
   });
 };
 

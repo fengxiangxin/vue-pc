@@ -1,5 +1,5 @@
 <template>
-  <div class="detail">
+  <div class="detail" v-if="skuInfo">
     <!-- 商品分类导航 -->
     <TypeNav />
 
@@ -30,6 +30,7 @@
           />
           <!-- 小图列表 -->
           <ImageList
+            v-if="skuInfo"
             :skuImageList="skuInfo.skuImageList"
             :updateCurrentImgIndex="updateCurrentImgIndex"
           />
