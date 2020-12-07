@@ -117,8 +117,8 @@ export default {
   },
   methods: {
     /* 刷新验证码，只需点击图片时重新设置图片的请求地址 */
-    refreshCode(e) {
-      e.target.src = "http://182.92.128.115/api/user/passport/code";
+    refreshCode() {
+      this.$refs.code.src = "http://182.92.128.115/api/user/passport/code";
     },
     /* 注册,收集数据，正则验证 */
     async register() {
@@ -141,9 +141,11 @@ export default {
         /* 注册成功跳转到登录页面 */
         this.$router.replace("/login");
       } catch (error) {
+        console.log(error);
         /* 如果注册失败就清空密码和刷新验证码 */
-        this.password = "";
-        this.r_password = "";
+        this.user.password = "";
+        this.user.r_password = "";
+        this.code = "";
         this.refreshCode();
       }
     },

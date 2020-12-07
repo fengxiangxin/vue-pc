@@ -8,24 +8,24 @@
             <a class="login-last-a">账户登录</a>
           </div>
           <div class="login-content">
-            <form>
+            <form @submit.prevent="submit">
               <div class="login-input-outer">
                 <label class="login-input">
-                  <i>111</i>
-                  <input type="text" />
+                  <i>手机</i>
+                  <input type="text" v-model="user.phone" />
                 </label>
-                <span>错误提示信息 </span>
+                <!-- <span>错误提示信息 </span> -->
               </div>
               <div class="login-input-outer">
                 <label class="login-input">
-                  <i>222</i>
-                  <input type="text" />
+                  <i>密码</i>
+                  <input type="text" v-model="user.password" />
                 </label>
-                <span>错误提示信息 </span>
+                <!-- <span>错误提示信息 </span> -->
               </div>
               <div class="login-auto">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" v-model="isAutoLogin" />
                   自动登录
                 </label>
                 <a href="###">忘记密码？</a>
@@ -43,19 +43,57 @@
 
 <script>
 import Copyright from "@components/Footer/Copyright";
-import { reqLogin } from "@api/user";
+import { mapState } from "vuex";
 export default {
   name: "Login",
+  data() {
+    return {
+      user: {
+        phone: "",
+        password: "",
+      },
+      isLoading: false,
+      isAutoLogin: true,
+    };
+  },
+  computed: {
+    ...mapState({
+      token: (state) => state.user.token,
+      name: (state) => state.user.name,
+    }),
+  },
   methods: {
-    login() {
-      reqLogin("13700000000", "111111")
-        .then((res) => {
-          console.log("res", res);
-        })
-        .catch((err) => {
-          console.log("err", err);
-        });
+    async submit() {
+      try {
+        /* 如果此时正在登录，则阻止此次登录 */
+        if (this.isLoading) return;
+
+        /* 正在登录中 */
+        this.isLoading = true;
+        const { phone, password } = this.user;
+        await this.$store.dispatch("login", { phone, password });
+        /* 如果用户勾选自动登录 */
+        if (this.isLoading) {
+          /* 将token和name存储在localstorage */
+          localStorage.setItem("token", this.token);
+          localStorage.setItem("name", this.name);
+        }
+        /* 登录成功跳转到首页 */
+        this.$router.replace("/");
+      } catch (error) {
+        console.log(error);
+        this.isLoading = false;
+      }
     },
+    // login() {
+    //   reqLogin("13700000000", "111111")
+    //     .then((res) => {
+    //       console.log("res", res);
+    //     })
+    //     .catch((err) => {
+    //       console.log("err", err);
+    //     });
+    // },
   },
   components: {
     Copyright,
