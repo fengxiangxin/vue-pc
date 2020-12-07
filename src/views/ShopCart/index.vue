@@ -31,7 +31,7 @@
             <a href="javascript:void(0)" class="mins">-</a>
             <input
               autocomplete="off"
-              type="number"
+              type="text"
               :value="cart.skuNum"
               minnum="1"
               class="itxt"
@@ -129,9 +129,9 @@
         <span>全选</span>
       </div>
       <div class="option">
-        <a href="#none">删除选中的商品</a>
-        <a href="#none">移到我的关注</a>
-        <a href="#none">清除下柜商品</a>
+        <a>删除选中的商品</a>
+        <a>移到我的关注</a>
+        <a>清除下柜商品</a>
       </div>
       <div class="money-box">
         <div class="chosed">
@@ -140,7 +140,7 @@
         </div>
         <div class="sumprice">
           <em>总价（不含运费） ：</em>
-          <i class="summoney">0</i>
+          <i class="summoney">{{ totalPrice }}</i>
         </div>
         <div class="sumbtn">
           <a class="sum-btn" href="###" target="_blank">结算</a>
@@ -163,6 +163,12 @@ export default {
       return this.cartList
         .filter((cart) => cart.isChecked === 1)
         .reduce((p, c) => p + c.skuNum, 0);
+    },
+    /* 计算商品总价 */
+    totalPrice() {
+      return this.cartList
+        .filter((cart) => cart.isChecked === 1)
+        .reduce((p, c) => p + c.skuNum * c.skuPrice, 0);
     },
   },
   methods: {

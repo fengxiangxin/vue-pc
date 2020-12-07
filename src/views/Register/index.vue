@@ -121,18 +121,31 @@ export default {
       e.target.src = "http://182.92.128.115/api/user/passport/code";
     },
     /* 注册,收集数据，正则验证 */
-    register() {
-      const { phone, code, password, r_password, isAgree } = this.user;
-      if (!isAgree) {
-        this.$message.error("请同意用户协议");
-        return;
+    async register() {
+      try {
+        const { phone, code, password, r_password, isAgree } = this.user;
+        if (!isAgree) {
+          this.$message.error("请同意用户协议");
+          return;
+        }
+        if (password !== r_password) {
+          this.$message.error("两次密码不一致");
+          return;
+        }
+        if (!code) {
+          this.$message.error("请输入验证码");
+          return;
+        }
+        /* 发送注册请求 */
+        await this.$store.dispatch("register", { phone, code, password });
+        /* 注册成功跳转到登录页面 */
+        this.$router.replace("/login");
+      } catch (error) {
+        /* 如果注册失败就清空密码和刷新验证码 */
+        this.password = "";
+        this.r_password = "";
+        this.refreshCode();
       }
-      if (password !== r_password) {
-        this.$message.error("两次密码不一致");
-        return;
-      }
-      /* 发送注册请求 */
-      console.log(phone, code, password, r_password, isAgree);
     },
   },
   components: {
