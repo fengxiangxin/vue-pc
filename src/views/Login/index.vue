@@ -9,13 +9,17 @@
           </div>
           <div class="login-content">
             <form @submit.prevent="submit">
+               <!-- <ValidationProvider rules="required"> -->
               <div class="login-input-outer">
                 <label class="login-input">
                   <i>手机</i>
-                  <input type="text" v-model="user.phone" />
+                 
+                    <input type="text" v-model="user.phone" />
+                  
+                  <!-- <span>{{ errors[0] }} </span> -->
                 </label>
-                <!-- <span>错误提示信息 </span> -->
               </div>
+<!-- </ValidationProvider> -->
               <div class="login-input-outer">
                 <label class="login-input">
                   <i>密码</i>
@@ -44,6 +48,10 @@
 <script>
 import Copyright from "@components/Footer/Copyright";
 import { mapState } from "vuex";
+/* felx布局似乎和ValidationProvider不能同时用？ */
+// import { ValidationProvider, extend } from "vee-validate";
+// import { required } from "vee-validate/dist/rules";
+// extend("required", required);
 export default {
   name: "Login",
   data() {
@@ -85,18 +93,17 @@ export default {
         this.isLoading = false;
       }
     },
-    // login() {
-    //   reqLogin("13700000000", "111111")
-    //     .then((res) => {
-    //       console.log("res", res);
-    //     })
-    //     .catch((err) => {
-    //       console.log("err", err);
-    //     });
-    // },
+  },
+  /* 自动登录 */
+  created() {
+    /* 判断是否有token，如果有则视为已登录 */
+    if (this.token) {
+      this.$router.replace("/");
+    }
   },
   components: {
     Copyright,
+    // ValidationProvider,
   },
 };
 </script>
