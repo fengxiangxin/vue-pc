@@ -1,5 +1,6 @@
 import Vue from "vue";
 import vueRouter from "vue-router";
+import store from "../store";
 
 import Home from "../views/Home";
 import Login from "../views/Login";
@@ -8,6 +9,10 @@ import Register from "../views/Register";
 import Detail from "../views/Detail";
 import AddCartSuccess from "../views/AddCartSuccess";
 import ShopCart from "../views/ShopCart";
+import Trade from "../views/Trade";
+import PaySuccess from "../views/PaySuccess";
+import Pay from "../views/Pay";
+import Center from "../views/Center";
 
 import VueRouter from "vue-router";
 
@@ -31,7 +36,7 @@ VueRouter.prototype.replace = function(location, onComplete, onAbort) {
 /* 安装路由插件 */
 Vue.use(vueRouter);
 
-export default new vueRouter({
+const router = new vueRouter({
   routes: [
     {
       /* 主页路由 */
@@ -79,9 +84,51 @@ export default new vueRouter({
       path: "/shopcart",
       component: ShopCart,
     },
+    {
+      /* 购物车 */
+      name: "trade",
+      path: "/trade",
+      component: Trade,
+    },
+    {
+      /* 购物车 */
+      name: "pay",
+      path: "/pay",
+      component: Pay,
+    },
+    {
+      /* 购物车 */
+      name: "paysuccess",
+      path: "/paysuccess",
+      component: PaySuccess,
+    },
+    {
+      /* 购物车 */
+      name: "center",
+      path: "/center/myorder",
+      component: Center,
+    },
   ],
   /* 路由切换时设置滚动条的位置为最顶部 */
   scrollBehavior() {
     return { x: 0, y: 0 };
   },
 });
+/* 路由全局前置守卫，设置未登录用户不能访问的页面 */
+const permissionPaths = ["trade", "pay", "center"];
+router.beforeEach((to, from, next) => {
+  /**
+   * to：目标路由
+   * from：当前路由
+   * next：只会执行一次的函数，控制跳转到哪个路由
+   */
+  /* 如果目标路由未登录用户无权访问 */
+  if (permissionPaths.indexOf(to.path) > -1 && store.state.user.token) {
+    /* 强制跳转到登录页面 */
+    return next("/login");
+  }
+  /* 否则正常跳转 */
+  next();
+});
+
+export default router;
