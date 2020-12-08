@@ -85,25 +85,25 @@ const router = new vueRouter({
       component: ShopCart,
     },
     {
-      /* 购物车 */
+      /* 交易信息 */
       name: "trade",
       path: "/trade",
       component: Trade,
     },
     {
-      /* 购物车 */
+      /* 支付 */
       name: "pay",
       path: "/pay",
       component: Pay,
     },
     {
-      /* 购物车 */
+      /* 支付成功 */
       name: "paysuccess",
       path: "/paysuccess",
       component: PaySuccess,
     },
     {
-      /* 购物车 */
+      /* 订单 */
       name: "center",
       path: "/center/myorder",
       component: Center,

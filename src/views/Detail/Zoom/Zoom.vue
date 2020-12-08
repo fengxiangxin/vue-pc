@@ -1,11 +1,11 @@
 <template>
   <div class="spec-preview">
     <img :src="imgUrl" />
-    <div class="event"></div>
+    <div class="event" @mousemove="mousemove"></div>
     <div class="big">
-      <img :src="bigImgUrl" />
+      <img :src="bigImgUrl" ref="bigImg" />
     </div>
-    <div class="mask"></div>
+    <div class="mask" ref="mask"></div>
   </div>
 </template>
 
@@ -15,6 +15,45 @@ export default {
   props: {
     imgUrl: String,
     bigImgUrl: String,
+  },
+  /**
+   * 实现一个图片放大镜效果
+   * 鼠标移动时获取鼠标的坐标----e.offsetX, e.offsetY
+   * 将鼠标坐标赋值给蒙板定位
+   * 获取蒙板定位-----this.$refs.mask.style.left
+   * 判断蒙板不能超出
+   * 为了保证鼠标始终在蒙板的中心，蒙板的定位应该为鼠标坐标减去蒙板长宽的一半
+   * 蒙板的定位是带单位的字符串，鼠标坐标是数值
+   * 大图定位于蒙板定位相关
+   * 大图定位是蒙板定位的两倍
+   * 大图定位与蒙板定位相反
+   */
+  methods: {
+    mousemove(e) {
+      /* 计算小图定位 */
+      const { offsetX, offsetY } = e;
+      const position = {
+        x: offsetX - 100,
+        y: offsetY - 100,
+      };
+      if (position.x < 0) {
+        position.x = 0;
+      }
+      if (position.x > 200) {
+        position.x = 200;
+      }
+      if (position.y < 0) {
+        position.y = 0;
+      }
+      if (position.y > 200) {
+        position.y = 200;
+      }
+      this.$refs.mask.style.left = `${position.x}px`;
+      this.$refs.mask.style.top = `${position.y}px`;
+      /* 计算大图定位 */
+      this.$refs.bigImg.style.left = `-${2 * position.x}px`;
+      this.$refs.bigImg.style.top = `-${2 * position.y}px`;
+    },
   },
 };
 </script>
