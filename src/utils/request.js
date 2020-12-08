@@ -8,6 +8,8 @@ import { Message } from "element-ui";
 /* 在拦截器中加上用户临时id */
 import getUserTempID from "@utils/getUserTempID";
 
+import store from "../store";
+
 const userTempID = getUserTempID();
 
 /* instance功能与axios类似，但是不完全相同 */
@@ -28,6 +30,12 @@ instance.interceptors.request.use(
 
     /* 在请求头中加上临时用户id */
     config.headers.userTempID = userTempID;
+
+    /* 在请求头中加上token，从vuex中获取token */
+    const token = store.state.user.token;
+    if (token) {
+      config.headers.token = token;
+    }
 
     return config;
   }

@@ -23,4 +23,7 @@ export default {
 .clear {
   border: none !important;
 }
+a {
+  cursor: pointer !important;
+}
 </style>

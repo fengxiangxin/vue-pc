@@ -22,7 +22,6 @@ export default {
     LOGIN(state, user) {
       state.name = user.name;
       state.token = user.token;
-      console.log(user);
     },
   },
 };
