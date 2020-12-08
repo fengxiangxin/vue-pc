@@ -138,7 +138,7 @@ export default {
     async submit() {
       const { tradeNo, detailArrayList } = this.trade;
       const { phoneNum, userAddress, consignee } = this.selectAdress;
-      await reqSubmitOrder({
+      const orderId = await reqSubmitOrder({
         tradeNo, //订单编号
         consignee, //收件人姓名
         consigneeTel: phoneNum, //收件人电话
@@ -146,6 +146,13 @@ export default {
         paymentWay: "ONLINE", //支付方式
         orderComment: this.orderComment, //订单备注
         orderDetailList: detailArrayList, //商品
+      });
+      /* 提交订单信息，跳转到支付页面 */
+      this.$router.push({
+        path: "/pay",
+        query: {
+          orderId,
+        },
       });
     },
   },

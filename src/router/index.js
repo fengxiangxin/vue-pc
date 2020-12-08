@@ -105,7 +105,7 @@ const router = new vueRouter({
     {
       /* 订单 */
       name: "center",
-      path: "/center/myorder",
+      path: "/center",
       component: Center,
     },
   ],
