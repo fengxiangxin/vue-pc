@@ -2,7 +2,12 @@
   <div>
     <div class="header-top-outer">
       <div class="header-top">
-        <div class="header-login-register">
+        <div class="header-login-register" v-if="$store.state.user.name">
+          <h1 class="header-welcome">尚品汇欢迎您！</h1>
+          <span>{{ $store.state.user.name }}</span>
+          <a>退出</a>
+        </div>
+        <div class="header-login-register" v-else>
           <h1 class="header-welcome">尚品汇欢迎您！请</h1>
           <router-link to="/login" class="header-login">登录 </router-link>
           <router-link to="/register" class="header-register"
