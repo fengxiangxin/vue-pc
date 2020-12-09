@@ -2,19 +2,25 @@ import Vue from "vue";
 import vueRouter from "vue-router";
 import store from "../store";
 
-import Home from "../views/Home";
-import Login from "../views/Login";
-import Search from "../views/Search";
-import Register from "../views/Register";
-import Detail from "../views/Detail";
-import AddCartSuccess from "../views/AddCartSuccess";
-import ShopCart from "../views/ShopCart";
-import Trade from "../views/Trade";
-import PaySuccess from "../views/PaySuccess";
-import Pay from "../views/Pay";
-import Center from "../views/Center";
-
-import VueRouter from "vue-router";
+/**
+ * 实现路由懒加载，每个路由视为一个页面，单独打包成一个文件（webpack的代码分割功能）
+ * 异步加载路由组件（vue的异步加载组件功能）
+ */
+const Home = () => import(/* webpackChunkName: "Home" */ "../views/Home");
+const Login = () => import(/* webpackChunkName: "Login" */ "../views/Login");
+const Search = () => import(/* webpackChunkName: "Search" */ "../views/Search");
+const Register = () =>
+  import(/* webpackChunkName: "Register" */ "../views/Register");
+const Detail = () => import(/* webpackChunkName: "Detail" */ "../views/Detail");
+const AddCartSuccess = () =>
+  import(/* webpackChunkName: "AddCartSuccess" */ "../views/AddCartSuccess");
+const ShopCart = () =>
+  import(/* webpackChunkName: "ShopCart" */ "../views/ShopCart");
+const Trade = () => import(/* webpackChunkName: "Trade" */ "../views/Trade");
+const PaySuccess = () =>
+  import(/* webpackChunkName: "PaySuccess" */ "../views/PaySuccess");
+const Pay = () => import(/* webpackChunkName: "Pay" */ "../views/Pay");
+const Center = () => import(/* webpackChunkName: "Center" */ "../views/Center");
 
 /**
  * 在Vue中编程式导航会返回一个promise对象
