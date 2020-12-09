@@ -6,7 +6,7 @@
         :key="carouser.id"
         class="swiper-slide"
       >
-        <img :src="carouser.imgUrl" />
+        <img v-lazy="carouser.imgUrl" />
       </div>
     </div>
     <!-- 如果需要分页器 -->

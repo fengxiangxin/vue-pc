@@ -9,17 +9,17 @@
           </div>
           <div class="login-content">
             <form @submit.prevent="submit">
-               <!-- <ValidationProvider rules="required"> -->
-              <div class="login-input-outer">
-                <label class="login-input">
-                  <i>手机</i>
-                 
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                <div class="login-input-outer">
+                  <label class="login-input">
+                    <i>手机</i>
+
                     <input type="text" v-model="user.phone" />
-                  
-                  <!-- <span>{{ errors[0] }} </span> -->
-                </label>
-              </div>
-<!-- </ValidationProvider> -->
+
+                    <span class="error">{{ errors[0] }} </span>
+                  </label>
+                </div>
+              </ValidationProvider>
               <div class="login-input-outer">
                 <label class="login-input">
                   <i>密码</i>
@@ -49,9 +49,9 @@
 import Copyright from "@components/Footer/Copyright";
 import { mapState } from "vuex";
 /* felx布局似乎和ValidationProvider不能同时用？ */
-// import { ValidationProvider, extend } from "vee-validate";
-// import { required } from "vee-validate/dist/rules";
-// extend("required", required);
+import { ValidationProvider, extend } from "vee-validate";
+import { required } from "vee-validate/dist/rules";
+extend("required", required);
 export default {
   name: "Login",
   data() {
@@ -103,7 +103,7 @@ export default {
   },
   components: {
     Copyright,
-    // ValidationProvider,
+    ValidationProvider,
   },
 };
 </script>
@@ -164,14 +164,8 @@ export default {
   border-top: none;
   flex-grow: 1;
   padding: 18px;
-  position: relative;
   form {
     margin: 15px 0 18px 0;
-  }
-  span {
-    color: red;
-    position: absolute;
-    left: 60px;
   }
 }
 .login-input-outer {
@@ -179,6 +173,7 @@ export default {
 }
 .login-input {
   display: flex;
+  position: relative;
 
   i {
     width: 37px;
@@ -196,6 +191,12 @@ export default {
     padding: 0 8px;
     outline: none;
     font-size: 14px;
+  }
+  .error {
+    color: red;
+    position: absolute;
+    left: 60px;
+    top: 36px;
   }
 }
 .login-auto {

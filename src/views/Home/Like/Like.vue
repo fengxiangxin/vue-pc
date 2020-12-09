@@ -8,47 +8,12 @@
       <div class="bd">
         <ul class="favourate">
           <li v-for="like in likes" :key="like.id">
-            <img :src="like.imgUrl" alt="" />
+            <img v-lazy="like.imgUrl" alt="" />
             <div class="like-text">
               <p>{{like.dis}}</p>
               <h3>¥116.00</h3>
             </div>
           </li>
-          <!-- <li>
-            <img src="./images/like_03.png" alt="" />
-            <div class="like-text">
-              <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-              <h3>¥116.00</h3>
-            </div>
-          </li>
-          <li>
-            <img src="./images/like_01.png" alt="" />
-            <div class="like-text">
-              <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-              <h3>¥116.00</h3>
-            </div>
-          </li>
-          <li>
-            <img src="./images/like_02.png" alt="" />
-            <div class="like-text">
-              <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-              <h3>¥116.00</h3>
-            </div>
-          </li>
-          <li>
-            <img src="./images/like_03.png" alt="" />
-            <div class="like-text">
-              <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-              <h3>¥116.00</h3>
-            </div>
-          </li>
-          <li>
-            <img src="./images/like_01.png" alt="" />
-            <div class="like-text">
-              <p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-              <h3>¥116.00</h3>
-            </div>
-          </li> -->
         </ul>
       </div>
     </div>

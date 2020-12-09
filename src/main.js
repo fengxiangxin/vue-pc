@@ -12,7 +12,10 @@ import "./styles/reset.css";
 /* 引入字体图标 */
 import "./styles/iconfont.css";
 
-import "./plugins/element.js";
+/* 引入插件 */
+import "./plugins/element";
+import "./plugins/lazyload";
+
 
 Vue.config.productionTip = false;
 
