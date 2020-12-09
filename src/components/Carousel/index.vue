@@ -26,6 +26,11 @@ Swiper.use([Navigation, Pagination, Autoplay]);
 
 export default {
   name: "Carouser",
+  // data(){
+  //   return {
+  //     imgList:this.carouserList
+  //   }
+  // },
   props: {
     carouserList: {
       type: Array,
