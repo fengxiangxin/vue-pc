@@ -37,6 +37,7 @@ VueRouter.prototype.replace = function(location, onComplete, onAbort) {
 Vue.use(vueRouter);
 
 const router = new vueRouter({
+  mode: "history", // 修改路由模式为history模式
   routes: [
     {
       /* 主页路由 */
