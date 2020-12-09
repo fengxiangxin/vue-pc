@@ -9,13 +9,12 @@
           </div>
           <div class="login-content">
             <form @submit.prevent="submit">
+              <!-- ValidationProvider会被当做span标签 -->
               <ValidationProvider rules="required" v-slot="{ errors }">
                 <div class="login-input-outer">
                   <label class="login-input">
                     <i>手机</i>
-
                     <input type="text" v-model="user.phone" />
-
                     <span class="error">{{ errors[0] }} </span>
                   </label>
                 </div>
@@ -51,7 +50,10 @@ import { mapState } from "vuex";
 /* felx布局似乎和ValidationProvider不能同时用？ */
 import { ValidationProvider, extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
-extend("required", required);
+extend("required", {
+  ...required,
+  message: "手机号为必填项", // 用于提示错误信息
+});
 export default {
   name: "Login",
   data() {

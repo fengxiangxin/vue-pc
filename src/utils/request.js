@@ -18,7 +18,7 @@ const prefix_url =
 
 /* instance功能与axios类似，但是不完全相同 */
 const instance = axios.create({
-  baseURL: prefix_url + "api",
+  baseURL: `${prefix_url}api`,
   // baseURL: "http://182.92.128.115/api",//上线地址
   headers: {},
 });

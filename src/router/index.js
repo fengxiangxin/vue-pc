@@ -122,7 +122,7 @@ const router = new VueRouter({
   },
 });
 /* 路由全局前置守卫，设置未登录用户不能访问的页面 */
-const permissionPaths = ["trade", "pay", "center"];
+const permissionPaths = ["/trade", "/pay", "/center"];
 router.beforeEach((to, from, next) => {
   /**
    * to：目标路由
@@ -130,7 +130,7 @@ router.beforeEach((to, from, next) => {
    * next：只会执行一次的函数，控制跳转到哪个路由
    */
   /* 如果目标路由未登录用户无权访问 */
-  if (permissionPaths.indexOf(to.path) > -1 && store.state.user.token) {
+  if (permissionPaths.indexOf(to.path) > -1 && !store.state.user.token) {
     /* 强制跳转到登录页面 */
     return next("/login");
   }
