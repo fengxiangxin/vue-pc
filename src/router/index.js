@@ -1,5 +1,5 @@
 import Vue from "vue";
-import vueRouter from "vue-router";
+import VueRouter from "vue-router";
 import store from "../store";
 
 /**
@@ -40,9 +40,9 @@ VueRouter.prototype.replace = function(location, onComplete, onAbort) {
 };
 
 /* 安装路由插件 */
-Vue.use(vueRouter);
+Vue.use(VueRouter);
 
-const router = new vueRouter({
+const router = new VueRouter({
   mode: "history", // 修改路由模式为history模式
   routes: [
     {

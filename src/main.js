@@ -13,9 +13,8 @@ import "./styles/reset.css";
 import "./styles/iconfont.css";
 
 /* 引入插件 */
-import "./plugins/element";
 import "./plugins/lazyload";
-
+import "./plugins/element";
 
 Vue.config.productionTip = false;
 

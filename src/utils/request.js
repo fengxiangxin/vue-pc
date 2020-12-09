@@ -12,9 +12,14 @@ import store from "../store";
 
 const userTempID = getUserTempID();
 
+// console.log(process.env.NODE_ENV); //development
+const prefix_url =
+  process.env.NODE_ENV === "development" ? "/" : "http://182.92.128.115/";
+
 /* instance功能与axios类似，但是不完全相同 */
 const instance = axios.create({
-  baseURL: "/api",
+  baseURL: prefix_url + "api",
+  // baseURL: "http://182.92.128.115/api",//上线地址
   headers: {},
 });
 

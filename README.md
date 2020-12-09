@@ -26,3 +26,8 @@ history模式可能会出现的404问题
 - 而在hush模式下发送请求时是不会携带`#`后的路径的，所以没有404问题
 - 解决办法
   - 在webpack的devServe配置中添加historyApiFallback: true配置
+
+
+
+在使用图片懒加载后，轮播图无法实现无缝轮播的bug
+element-ui插件是无法识别lazyload插件中扩展的v-lazy指令
