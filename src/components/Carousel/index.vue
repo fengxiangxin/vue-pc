@@ -1,11 +1,7 @@
 <template>
   <div class="swiper-container" ref="swiper">
     <div class="swiper-wrapper">
-      <div
-        v-for="carouser in carouserList"
-        :key="carouser.id"
-        class="swiper-slide"
-      >
+      <div v-for="carouser in imgList" :key="carouser.id" class="swiper-slide">
         <img :src="carouser.imgUrl" />
       </div>
     </div>
@@ -26,11 +22,11 @@ Swiper.use([Navigation, Pagination, Autoplay]);
 
 export default {
   name: "Carouser",
-  // data(){
-  //   return {
-  //     imgList:this.carouserList
-  //   }
-  // },
+  data() {
+    return {
+      imgList: this.carouserList,
+    };
+  },
   props: {
     carouserList: {
       type: Array,
@@ -47,9 +43,12 @@ export default {
      *   - DOM元素更新是异步微任务
      *   - nextTick()只会在DOM元素更新完成后执行
      */
-    carouserList() {
+    carouserList(newVal) {
+      this.imgList = newVal;
       /* 如果swiper已经存在，则不允许重复new */
+      // this.swiper = null;
       if (this.swiper) return;
+      // this.swiper=null;
       this.$nextTick(() => {
         this.initSwiper();
       });
@@ -96,8 +95,10 @@ export default {
     if (!this.carouserList.length) return;
     this.initSwiper();
   },
+  // beforeDestroy() {
+  //   this.swiper.removeAllSlides();
+  // },
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

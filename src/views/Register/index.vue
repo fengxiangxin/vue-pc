@@ -60,7 +60,7 @@
         <!-- <span class="error-msg">错误提示信息</span> -->
       </div>
       <div class="btn">
-        <button @click="register">完成注册</button>
+        <Button @click="register">完成注册</Button>
       </div>
     </div>
 
@@ -71,6 +71,7 @@
 
 <script>
 import Copyright from "@components/Footer/Copyright";
+import Button from "@components/Button";
 /**
  * 使用vee-validate实现表单验证功能
  * extend用于自定义规则
@@ -153,6 +154,7 @@ export default {
   components: {
     Copyright,
     ValidationProvider,
+    Button,
   },
 };
 </script>

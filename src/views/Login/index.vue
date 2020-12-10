@@ -47,7 +47,6 @@
 <script>
 import Copyright from "@components/Footer/Copyright";
 import { mapState } from "vuex";
-/* felx布局似乎和ValidationProvider不能同时用？ */
 import { ValidationProvider, extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
 extend("required", {
